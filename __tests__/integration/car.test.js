@@ -12,13 +12,17 @@ describe("Car", () => {
   });
 
   it("should create a car", async () => {
-    // const car = await factory.create("Car", Car);
+    const car = await factory.attrs("Car");
 
-    // const car = await Car.create({
+    const response = await request(app).post("/cars").send(car);
 
-    // })
+    expect(response.status).toBe(200);
+  });
 
-    const response = await request(app).post("/cars").send({});
+  it("should list cars", async () => {
+    const car = await factory.create("Car");
+
+    const response = await request(app).get("/cars");
 
     expect(response.status).toBe(200);
   });

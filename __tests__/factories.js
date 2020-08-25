@@ -1,7 +1,7 @@
 const faker = require("faker");
 const { factory } = require("factory-girl");
 const { User } = require("../src/app/models");
-const { Car } = require("../src/app/models/Car");
+const { Car } = require("../src/app/models");
 
 factory.define("User", User, {
   name: faker.name.findName(),
@@ -9,20 +9,13 @@ factory.define("User", User, {
   password: faker.internet.password(),
 });
 
-// factory.define("Car", Car, {
-//   brand: "Ford",
-//   model: "AWS",
-//   year: 2018,
-//   fuel: "DIESEL",
-//   color: "white",
-//   price: 100000.0,
-// });
-
-// brand: DataTypes.STRING,
-// model: DataTypes.STRING,
-// year: DataTypes.INTEGER,
-// fuel: DataTypes.STRING,
-// color: DataTypes.STRING,
-// price: DataTypes.DOUBLE,
+factory.define("Car", Car, {
+  brand: "Ford",
+  model: "AWS",
+  year: 2018,
+  fuel: "DIESEL",
+  color: "white",
+  price: 100000.0,
+});
 
 module.exports = factory;
