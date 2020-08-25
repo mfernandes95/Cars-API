@@ -12,17 +12,25 @@ describe("Car", () => {
   });
 
   it("should create a car", async () => {
+    const user = await factory.create("User", {
+      // password: "123123",
+    });
     const car = await factory.attrs("Car");
 
-    const response = await request(app).post("/cars").send(car);
+    const response = await request(app)
+      .post("/cars")
+      .set("Authorization", `Bearer ${user.generateToken()}`)
+      .send(car);
 
     expect(response.status).toBe(200);
   });
 
   it("should list cars", async () => {
-    const car = await factory.create("Car");
+    const user = await factory.create("User");
 
-    const response = await request(app).get("/cars");
+    const response = await request(app)
+      .get("/cars")
+      .set("Authorization", `Bearer ${user.generateToken()}`);
 
     expect(response.status).toBe(200);
   });

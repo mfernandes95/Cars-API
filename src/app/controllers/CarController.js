@@ -8,9 +8,9 @@ class CarController {
       console.log("reqq", req.userId);
       const car = await Car.create({
         ...data,
-        user_id: 1,
+        user_id: req.userId,
       });
-      console.log("carrrrr", car);
+      console.log("carrrrrpdpowjdiwjdwjidjiw", car);
       return res.status(200).json({ car: car });
     } catch (error) {
       return res.status(400).json({ message: error.message });

@@ -9,10 +9,9 @@ const UserController = require("./app/controllers/UserController");
 routes.post("/sessions", SessionController.store);
 routes.post("/users", UserController.store);
 
-routes.get("/cars", CarController.index);
-
 routes.use(authMiddleware);
 routes.post("/cars", CarController.store);
+routes.get("/cars", CarController.index);
 // routes.post("/sessions", SessionController.store);
 
 // routes.put("/cars", CarController.update);
