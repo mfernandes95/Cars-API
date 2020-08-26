@@ -10,7 +10,6 @@ class CarController {
         ...data,
         user_id: req.userId,
       });
-      console.log("carrrrrpdpowjdiwjdwjidjiw", car);
       return res.status(200).json({ car: car });
     } catch (error) {
       return res.status(400).json({ message: error.message });
@@ -19,9 +18,38 @@ class CarController {
 
   async index(req, res) {
     try {
-      const cars = await Car.findAll();
-      console.log("carrrrr", cars);
+      const { page = 1 } = req.query;
+
+      const limit = 2;
+
+      const cars = await Car.findAll({
+        where: { user_id: req.userId },
+        order: ["id"],
+        attributes: ["id", "brand", "model", "year", "fuel", "color", "price"],
+        limit: limit,
+        offset: (page - 1) * limit,
+        include: [
+          {
+            model: User,
+            as: "owner",
+            attributes: ["id", "name"],
+          },
+        ],
+      });
+
       return res.status(200).json({ car: cars });
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  async show(req, res) {
+    try {
+      const car = await Car.findOne({
+        where: { id: req.params.id },
+      });
+
+      return res.status(200).json({ car: car });
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }

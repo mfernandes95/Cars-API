@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = function (models) {
-    User.hasMany(models.Car, { foreignKey: "User_id", as: "cars" });
+    User.hasMany(models.Car, { foreignKey: "user_id", as: "cars" });
   };
 
   User.prototype.checkPassword = function (password) {

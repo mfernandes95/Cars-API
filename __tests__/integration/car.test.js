@@ -12,9 +12,7 @@ describe("Car", () => {
   });
 
   it("should create a car", async () => {
-    const user = await factory.create("User", {
-      // password: "123123",
-    });
+    const user = await factory.create("User");
     const car = await factory.attrs("Car");
 
     const response = await request(app)
@@ -30,6 +28,21 @@ describe("Car", () => {
 
     const response = await request(app)
       .get("/cars")
+      .set("Authorization", `Bearer ${user.generateToken()}`);
+
+    expect(response.status).toBe(200);
+  });
+
+  it("should list car by id", async () => {
+    // console.log("caridddddddddd", car);
+
+    const user = await factory.create("User", {});
+    const car = await factory.create("Car", {
+      user_id: user.id,
+    });
+
+    const response = await request(app)
+      .get(`/cars/${car.id}`)
       .set("Authorization", `Bearer ${user.generateToken()}`);
 
     expect(response.status).toBe(200);

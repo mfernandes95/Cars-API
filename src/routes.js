@@ -12,10 +12,10 @@ routes.post("/users", UserController.store);
 routes.use(authMiddleware);
 routes.post("/cars", CarController.store);
 routes.get("/cars", CarController.index);
+routes.get("/cars/:id", CarController.show);
 // routes.post("/sessions", SessionController.store);
 
 // routes.put("/cars", CarController.update);
-// routes.get("/cars/:id", CarController.show);
 // routes.delete("/cars", CarController.delete);
 
 routes.get("/dashboard", (req, res) => {
