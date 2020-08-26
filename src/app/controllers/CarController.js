@@ -5,7 +5,6 @@ class CarController {
   async store(req, res) {
     try {
       const data = req.body;
-      console.log("reqq", req.userId);
       const car = await Car.create({
         ...data,
         user_id: req.userId,
