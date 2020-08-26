@@ -18,4 +18,13 @@ factory.define("Car", Car, {
   price: 100000.0,
 });
 
+// factory.define("Car", Car, {
+//   brand: faker.name.findName(),
+//   model: faker.name.findName(),
+//   year: 2018,
+//   fuel: faker.vehicle.fuel(),
+//   color: faker.commerce.color(),
+//   price: faker.commerce.price(),
+// });
+
 module.exports = factory;

@@ -18,8 +18,4 @@ routes.get("/cars/:id", CarController.show);
 routes.put("/cars/:id", CarController.update);
 routes.delete("/cars/:id", CarController.delete);
 
-routes.get("/dashboard", (req, res) => {
-  return res.status(200).send();
-});
-
 module.exports = routes;
