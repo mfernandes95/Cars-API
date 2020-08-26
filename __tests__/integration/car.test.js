@@ -34,9 +34,7 @@ describe("Car", () => {
   });
 
   it("should list car by id", async () => {
-    // console.log("caridddddddddd", car);
-
-    const user = await factory.create("User", {});
+    const user = await factory.create("User");
     const car = await factory.create("Car", {
       user_id: user.id,
     });
@@ -44,6 +42,27 @@ describe("Car", () => {
     const response = await request(app)
       .get(`/cars/${car.id}`)
       .set("Authorization", `Bearer ${user.generateToken()}`);
+
+    expect(response.status).toBe(200);
+  });
+
+  it("should update car by id", async () => {
+    const user = await factory.create("User");
+    const car = await factory.create("Car", {
+      user_id: user.id,
+    });
+
+    const response = await request(app)
+      .put(`/cars/${car.id}`)
+      .set("Authorization", `Bearer ${user.generateToken()}`)
+      .send({
+        brand: "Ford",
+        model: "AWS",
+        year: 2018,
+        fuel: "DIESEL",
+        color: "white",
+        price: 100000.0,
+      });
 
     expect(response.status).toBe(200);
   });

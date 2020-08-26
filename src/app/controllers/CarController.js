@@ -49,11 +49,35 @@ class CarController {
         where: { id: req.params.id },
       });
 
+      if (!car) return res.status(404).json({ message: "Car not found" });
+
       return res.status(200).json({ car: car });
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
   }
+
+  async update(req, res) {
+    try {
+      const car = await Car.findOne({
+        where: { id: req.params.id },
+      });
+
+      if (!car) return res.status(404).json({ message: "Car not found" });
+
+      if (car.user_id !== req.userId)
+        return res
+          .status(401)
+          .json({ message: "You cannot update cars by other owner" });
+
+      await car.update(req.body);
+
+      return res.status(200).json({ car: car });
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+  // await user.update(req.body);
 }
 
 module.exports = new CarController();

@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
       },
       year: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       fuel: {
@@ -30,7 +30,7 @@ module.exports = {
         allowNull: false,
       },
       price: {
-        type: Sequelize.STRING,
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
       user_id: {

@@ -15,8 +15,8 @@ routes.get("/cars", CarController.index);
 routes.get("/cars/:id", CarController.show);
 // routes.post("/sessions", SessionController.store);
 
-// routes.put("/cars", CarController.update);
-// routes.delete("/cars", CarController.delete);
+routes.put("/cars/:id", CarController.update);
+// routes.delete("/cars/:id", CarController.delete);
 
 routes.get("/dashboard", (req, res) => {
   return res.status(200).send();
