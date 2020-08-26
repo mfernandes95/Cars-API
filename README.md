@@ -3,12 +3,12 @@
 ## Run
 
 ```bash
-docker-compose up --build
+sudo docker-compose up --build
 ```
 
 ## Run Tests
 
-### NOT STABLE
+##### NOT STABLE
 
 ```bash
 docker exec -it node_carsapi /bin/sh
