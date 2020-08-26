@@ -12,7 +12,7 @@ class CarController {
       });
       return res.status(200).json({ car: car });
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      return res.status(400).json({ error: error.message });
     }
   }
 
@@ -31,7 +31,7 @@ class CarController {
         include: [
           {
             model: User,
-            as: "owner",
+            as: "user",
             attributes: ["id", "name"],
           },
         ],
@@ -39,7 +39,7 @@ class CarController {
 
       return res.status(200).json({ car: cars });
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      return res.status(400).json({ error: error.message });
     }
   }
 
@@ -53,7 +53,7 @@ class CarController {
 
       return res.status(200).json({ car: car });
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      return res.status(400).json({ error: error.message });
     }
   }
 
@@ -65,19 +65,32 @@ class CarController {
 
       if (!car) return res.status(404).json({ message: "Car not found" });
 
-      if (car.user_id !== req.userId)
-        return res
-          .status(401)
-          .json({ message: "You cannot update cars by other owner" });
-
       await car.update(req.body);
 
-      return res.status(200).json({ car: car });
+      return res.status(200).json({
+        message: "update success",
+        car: car,
+      });
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const car = await Car.findOne({
+        where: { id: req.params.id },
+      });
+
+      if (!car) return res.status(404).json({ error: "Car not found" });
+
+      await car.destroy();
+
+      return res.status(200).json({ message: "Car removed." });
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
   }
-  // await user.update(req.body);
 }
 
 module.exports = new CarController();

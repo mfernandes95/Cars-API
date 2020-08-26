@@ -14,14 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Car.associate = function (models) {
-    Car.belongsTo(models.User, { foreignKey: "user_id", as: "owner" });
+    Car.belongsTo(models.User, { foreignKey: "user_id", as: "user" });
   };
 
   return Car;
 };
-
-// static associate(models) {
-//     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
-//   }
-
-//  marca, modelo, ano, combustível, cor e preço.

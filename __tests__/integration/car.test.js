@@ -66,4 +66,17 @@ describe("Car", () => {
 
     expect(response.status).toBe(200);
   });
+
+  it("should delete car by id", async () => {
+    const user = await factory.create("User");
+    const car = await factory.create("Car", {
+      user_id: user.id,
+    });
+
+    const response = await request(app)
+      .delete(`/cars/${car.id}`)
+      .set("Authorization", `Bearer ${user.generateToken()}`);
+
+    expect(response.status).toBe(200);
+  });
 });

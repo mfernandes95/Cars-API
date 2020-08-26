@@ -12,7 +12,6 @@ class SessionController {
       if (!(await user.checkPassword(password)))
         return res.status(401).json({ message: "Incorrect credentials" });
 
-      // return res.json({ user });
       return res.status(200).send({ user, token: user.generateToken() });
     } catch (error) {
       return res.status(400).json({ message: error.message });
