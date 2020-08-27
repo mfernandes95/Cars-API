@@ -68,11 +68,14 @@
         },
         "produces": ["application/json"],
         "responses": {
-          "200": {
+          "201": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/id"
             }
+          },
+          "400": {
+            "description": "User already exists."
           },
           "400": {
             "description": "Failed. Bad post data."
@@ -103,6 +106,9 @@
               "$ref": "#/definitions/id"
             }
           },
+          "404": {
+            "description": "Failed, User not found."
+          },
           "400": {
             "description": "Failed. Bad post data."
           }
@@ -110,18 +116,6 @@
       }
     },
     "/cars": {
-      "get": {
-        "tags": ["Cars"],
-        "summary": "Get all cars in system",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Cars"
-            }
-          }
-        }
-      },
       "post": {
         "tags": ["Cars"],
         "summary": "Create a new car in system",
@@ -138,7 +132,7 @@
         },
         "produces": ["application/json"],
         "responses": {
-          "200": {
+          "201": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/id"
@@ -146,6 +140,18 @@
           },
           "400": {
             "description": "Failed. Bad post data."
+          }
+        }
+      },
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Get all cars in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cars"
+            }
           }
         }
       }
