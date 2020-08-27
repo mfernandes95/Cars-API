@@ -1,0 +1,179 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Cars API",
+    "description": "Cars API registration",
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/license/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/",
+      "description": "Local Dev, or from Heroku"
+    },
+    {
+      "url": "/api/",
+      "description": "With docker-compose and nginx proxy"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Cars",
+      "description": "API for cars in the system"
+    }
+  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/cars/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of the car that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Get car with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Car with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          },
+          "404": {
+            "description": "Failed. Car not found."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update car with given ID",
+        "tags": ["Cars"],
+        "requestBody": {
+          "description": "Car Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Car with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          },
+          "404": {
+            "description": "Failed. Car not found."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete car with given ID",
+        "tags": ["Cars"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Delete Car with id",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          },
+          "404": {
+            "description": "Failed. Cars not found."
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "id": {
+      "properties": {
+        "uuid": {
+          "type": "string"
+        }
+      }
+    },
+    "Car": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "fuel": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      }
+    },
+    "Cars": {
+      "type": "object",
+      "properties": {
+        "cars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Car"
+          }
+        }
+      }
+    }
+  }
+}
