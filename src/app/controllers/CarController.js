@@ -9,7 +9,7 @@ class CarController {
         ...data,
         user_id: req.userId,
       });
-      return res.status(200).json({ car: car });
+      return res.status(201).json({ car: car });
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
@@ -31,7 +31,7 @@ class CarController {
           {
             model: User,
             as: "user",
-            attributes: ["id", "name"],
+            attributes: ["id", "name", "email"],
           },
         ],
       });

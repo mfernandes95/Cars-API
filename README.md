@@ -6,6 +6,12 @@
 sudo docker-compose up --build
 ```
 
+## Get Documentation
+
+http://localhost:3333/api-docs/
+
+![](./imagens/swagger.png)
+
 ## Postman Collection
 
 https://www.getpostman.com/collections/b491cefa52cdc5245e07
