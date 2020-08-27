@@ -31,7 +31,7 @@ class CarController {
           {
             model: User,
             as: "user",
-            attributes: ["id", "name"],
+            attributes: ["id", "name", "email"],
           },
         ],
       });
