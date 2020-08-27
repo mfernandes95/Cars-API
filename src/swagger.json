@@ -9,6 +9,7 @@
       "url": "http://opensource.org/license/MIT"
     }
   },
+
   "servers": [
     {
       "url": "/",
@@ -21,6 +22,14 @@
   ],
   "tags": [
     {
+      "name": "Users",
+      "description": "Create user"
+    },
+    {
+      "name": "Sessions",
+      "description": "Init sessions"
+    },
+    {
       "name": "Cars",
       "description": "API for cars in the system"
     }
@@ -28,6 +37,105 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a new user in system",
+        "requestBody": {
+          "description": "User Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "tags": ["Sessions"],
+        "summary": "Init a sessions",
+        "requestBody": {
+          "description": "Session Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Session"
+              }
+            }
+          }
+        },
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/cars": {
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Get all cars in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cars"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Create a new car in system",
+        "requestBody": {
+          "description": "Car Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Car"
+              }
+            }
+          }
+        },
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/id"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
     "/cars/{id}": {
       "parameters": [
         {
@@ -138,6 +246,53 @@
       "properties": {
         "uuid": {
           "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Users": {
+      "type": "object",
+      "properties": {
+        "cars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      }
+    },
+    "Session": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Sessions": {
+      "type": "object",
+      "properties": {
+        "cars": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Session"
+          }
         }
       }
     },
