@@ -18,22 +18,7 @@
       }
     }
   },
-  "security": [
-    {
-      "bearerAuth": ["Cars"]
-    }
-  ],
 
-  "servers": [
-    {
-      "url": "/",
-      "description": "Local Dev, or from Heroku"
-    },
-    {
-      "url": "/api/",
-      "description": "With docker-compose and nginx proxy"
-    }
-  ],
   "tags": [
     {
       "name": "Users",
@@ -117,6 +102,11 @@
     },
     "/cars": {
       "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": ["Cars"],
         "summary": "Create a new car in system",
         "requestBody": {
@@ -144,6 +134,11 @@
         }
       },
       "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": ["Cars"],
         "summary": "Get all cars in system",
         "responses": {
@@ -167,6 +162,11 @@
         }
       ],
       "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": ["Cars"],
         "summary": "Get car with given ID",
         "parameters": [
@@ -193,6 +193,11 @@
         }
       },
       "put": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "summary": "Update car with given ID",
         "tags": ["Cars"],
         "requestBody": {
@@ -233,6 +238,11 @@
         }
       },
       "delete": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "summary": "Delete car with given ID",
         "tags": ["Cars"],
         "parameters": [
@@ -264,8 +274,8 @@
   "definitions": {
     "id": {
       "properties": {
-        "uuid": {
-          "type": "string"
+        "id": {
+          "type": "integer"
         }
       }
     },
