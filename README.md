@@ -1,4 +1,6 @@
-# cars-api
+# Cars-api
+
+API in NodeJS using: Express, Postgres, Jest, Docker, Swagger
 
 ## Run
 
