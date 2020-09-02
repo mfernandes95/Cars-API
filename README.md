@@ -1,4 +1,4 @@
-# Cars-api
+# Cars-API
 
 API in NodeJS using: Express, JWT, Postgres, Jest, Docker, Swagger. To authenticate users and CRUD cars.
 
