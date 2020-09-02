@@ -1,6 +1,8 @@
 # Cars-api
 
-API in NodeJS using: Express, Postgres, Jest, Docker, Swagger
+API in NodeJS using: Express, JWT, Postgres, Jest, Docker, Swagger. To authenticate users and CRUD cars.
+
+
 
 ## Run
 
